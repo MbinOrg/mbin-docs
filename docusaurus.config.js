@@ -7,6 +7,11 @@
 import { themes as prismThemes } from 'prism-react-renderer';
 import Prism from "prismjs";
 
+const prsimLanguages = ['nginx', 'php', 'yaml', 'json', 'javascript', 'ini', 'bash'];
+prsimLanguages.forEach((lang) => {
+    require(`prismjs/components/prism-${lang}`);
+});
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
     title: 'Mbin Docs',
@@ -96,7 +101,7 @@ const config = {
             prism: {
                 theme: prismThemes.github,
                 darkTheme: prismThemes.dracula,
-                additionalLanguages: ['nginx', 'php', 'yaml', 'twig', 'sql', 'scss', 'regex', 'json', 'javascript', 'ini', 'bash']
+                additionalLanguages: prsimLanguages
             },
         }),
 };
