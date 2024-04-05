@@ -5,6 +5,7 @@
 // See: https://docusaurus.io/docs/api/docusaurus-config
 
 import { themes as prismThemes } from 'prism-react-renderer';
+import Prism from "prismjs";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -41,7 +42,6 @@ const config = {
             ({
                 docs: {
                     routeBasePath: '/',
-                    sidebarPath: './sidebars.js',
                     // Please change this to your repo.
                     // Remove this to remove the "edit this page" links.
                     editUrl: 'https://github.com/MbinOrg/mbin/tree/main/',
