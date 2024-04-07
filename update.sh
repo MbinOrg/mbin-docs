@@ -41,6 +41,7 @@ if [[ $(git rev-list HEAD...origin/"$branch_name" --count) -gt 0 ]]; then
 
     # Copy files
     cd "../"
+    rm -r ./docs/*
     # copy all .md files and folders from the source repo
     rsync --mkpath -f'+ */' -f'+ *.md' -f'- *' -r ./mbin-repo/docs ./
     cp ./mbin-repo/docs/images -r ./docs/
