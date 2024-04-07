@@ -44,8 +44,8 @@ if [[ $(git rev-list HEAD...origin/"$branch_name" --count) -gt 0 ]]; then
     # copy all .md files and folders from the source repo
     rsync --mkpath -f'+ */' -f'+ *.md' -f'- *' -r ./mbin-repo/docs ./
     cp ./mbin-repo/docs/images -r ./docs/
-    cp "./mbin-repo/CONTRIBUTING.md" ./docs/contributing/README.md
-    cp "./mbin-repo/C4.md" ./docs/contributing/
+    cp ./mbin-repo/CONTRIBUTING.md ./docs/contributing/README.md
+    cp ./mbin-repo/C4.md ./mbin-repo/LICENSE ./docs/contributing/
     npm run build
 
     # Set post command
