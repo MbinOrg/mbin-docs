@@ -2,7 +2,6 @@
 
 # Define variables
 local_dir="./mbin-repo"
-files_to_copy=("**/*.md" "images")
 post_command="echo 1"
 new_tag_exists=false
 latest_tag=""
@@ -42,12 +41,11 @@ if [[ $(git rev-list HEAD...origin/"$branch_name" --count) -gt 0 ]]; then
 
     # Copy files
     cd "../"
-    for file in "${files_to_copy[@]}"; do
-        echo "Copying file: $file"
-        cp -r "mbin-repo/docs/$file" ./docs/
-    done
-    cp "mbin-repo/CONTRIBUTING.md" ./docs/contributing/README.md
-    cp "mbin-repo/C4.md" ./docs/contributing/
+    # copy all .md files and folders from the source repo
+    rsync --mkpath -f'+ */' -f'+ *.md' -f'- *' -r ./mbin-repo/docs ./
+    cp ./mbin-repo/docs/images -r ./docs/
+    cp "./mbin-repo/CONTRIBUTING.md" ./docs/contributing/README.md
+    cp "./mbin-repo/C4.md" ./docs/contributing/
     npm run build
 
     # Set post command
