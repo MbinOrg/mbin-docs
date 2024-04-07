@@ -2,7 +2,7 @@
 
 # Define variables
 local_dir="./mbin-repo"
-files_to_copy=("admin_guide.md" "FAQ.md" "docker_deployment_guide.md" "oauth2_guide.md" "user_guide.md" "images")
+files_to_copy=("**/*.md" "images")
 post_command="echo 1"
 new_tag_exists=false
 latest_tag=""
@@ -46,6 +46,8 @@ if [[ $(git rev-list HEAD...origin/"$branch_name" --count) -gt 0 ]]; then
         echo "Copying file: $file"
         cp -r "mbin-repo/docs/$file" ./docs/
     done
+    cp "mbin-repo/CONTRIBUTING.md" ./docs/contributing/README.md
+    cp "mbin-repo/C4.md" ./docs/contributing/
     npm run build
 
     # Set post command
