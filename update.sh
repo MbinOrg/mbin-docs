@@ -5,7 +5,7 @@ local_dir="./mbin-repo"
 post_command="echo 1"
 new_tag_exists=false
 latest_tag=""
-branch_name="documentation-hosting"
+branch_name="main"
 
 # Change directory to the local repository
 cd "$local_dir" || exit
