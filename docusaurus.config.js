@@ -57,6 +57,22 @@ const config = {
                 },
             }),
         ],
+        [
+            'redocusaurus',
+            /** @type {import('redocusaurus').PresetOptions} */
+            {
+                specs: [
+                    {
+                        spec: 'docs/mbin-api.json',
+                        route: '/api/'
+                    }
+                ],
+                themeOptions: {
+                    primaryColor: '#9141ac',
+                    primaryColorDark: '#9c9fc9',
+                }
+            }
+        ]
     ],
 
     themeConfig:
@@ -70,6 +86,16 @@ const config = {
                 },
                 items: [
                     {
+                        href: '/',
+                        label: 'Docs',
+                        position: 'left',
+                    },
+                    {
+                        href: '/api',
+                        label: 'API',
+                        position: 'left',
+                    },
+                    {
                         href: 'https://github.com/mbinOrg/mbin',
                         label: 'GitHub',
                         position: 'right',
@@ -79,6 +105,19 @@ const config = {
             footer: {
                 style: 'dark',
                 links: [
+                    {
+                        title: 'Links',
+                        items: [
+                            {
+                                href: '/',
+                                label: 'Docs',
+                            },
+                            {
+                                href: '/api',
+                                label: 'API',
+                            }
+                        ]
+                    },
                     {
                         title: 'Community',
                         items: [
