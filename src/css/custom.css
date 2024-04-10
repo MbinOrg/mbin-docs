@@ -28,3 +28,13 @@
   --ifm-color-primary-lightest: #b3b5d6;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+.navbar {
+  background-color: #29144a;
+  color: #e3e3e3;
+}
+
+.navbar__link,
+.navbar__brand {
+  color: #e3e3e3;
+}
