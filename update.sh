@@ -83,7 +83,7 @@ if $force_update || [[ $(git rev-list HEAD...origin/"$branch_name" --count) -gt 
 
     cd "$local_dir" || exit
 
-    composer install
+    composer install --no-scripts
     touch "$SCRIPT_DIR/docs/mbin-api.json"
     php bin/console nelmio:apidoc:dump --format=json --no-pretty > "$SCRIPT_DIR/docs/mbin-api.json"
 
