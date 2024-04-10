@@ -38,3 +38,8 @@
 .navbar__brand {
   color: #e3e3e3;
 }
+
+.redocusaurus .menu-content {
+  top: 3.75em !important;
+  height: calc(100vh - 3.75em) !important;
+}

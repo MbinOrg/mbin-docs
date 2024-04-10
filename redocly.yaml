@@ -1,0 +1,28 @@
+# NOTE: Only supports options marked as "Supported in Redoc CE"
+# See https://redocly.com/docs/cli/configuration/ for more information.
+
+extends:
+  - recommended
+
+theme:
+  # See https://redocly.com/docs/api-reference-docs/configuration/functionality/
+  openapi:
+    disableSearch: false
+    # See https://redocly.com/docs/api-reference-docs/configuration/theming/
+    theme:
+      colors:
+        primary:
+          main: '#9141ac'
+        accent:
+          light: '#9b46b8'
+          dark: '#a8aacf'
+        border:
+          light: '#9b46b8'
+          dark: '#a8aacf'
+      sidebar:
+        activeTextColor: '#9b46b8'
+      typography:
+        links:
+          color: '#9844b5'
+          hover: '#e083ff'
+          

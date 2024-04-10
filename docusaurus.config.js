@@ -5,6 +5,7 @@
 // See: https://docusaurus.io/docs/api/docusaurus-config
 
 import { themes as prismThemes } from 'prism-react-renderer';
+import path from 'path';
 import Prism from "prismjs";
 
 const prsimLanguages = ['nginx', 'php', 'yaml', 'json', 'javascript', 'ini', 'bash'];
@@ -67,6 +68,7 @@ const config = {
                         route: '/api/'
                     }
                 ],
+                config: path.join(__dirname, 'redocly.yaml'),
                 themeOptions: {
                     primaryColor: '#9141ac',
                     primaryColorDark: '#9c9fc9',
