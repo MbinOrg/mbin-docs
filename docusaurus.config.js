@@ -7,6 +7,7 @@
 import { themes as prismThemes } from 'prism-react-renderer';
 import path from 'path';
 import Prism from "prismjs";
+import remarkGithubAdmonitionsToDirectives from "remark-github-admonitions-to-directives";
 
 const prsimLanguages = ['nginx', 'php', 'yaml', 'json', 'javascript', 'ini', 'bash'];
 prsimLanguages.forEach((lang) => {
@@ -31,7 +32,7 @@ const config = {
     projectName: 'mbin', // Usually your repo name.
 
     onBrokenLinks: 'warn',
-    onBrokenMarkdownLinks: 'warn',
+    onBrokenMarkdownLinks: 'throw',
 
     // Even if you don't use internationalization, you can use this field to set
     // useful metadata like html lang. For example, if your site is Chinese, you
@@ -51,6 +52,7 @@ const config = {
                     // Please change this to your repo.
                     // Remove this to remove the "edit this page" links.
                     editUrl: 'https://github.com/MbinOrg/mbin/tree/main/',
+                    beforeDefaultRemarkPlugins: [remarkGithubAdmonitionsToDirectives]
                 },
                 blog: false,
                 theme: {
