@@ -38,8 +38,8 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
-      - name: Clone mbin repo
-        run: git clone https://github.com/mbinOrg/mbin
+      - name: Clone and setup mbin repo
+        run: git clone https://github.com/mbinOrg/mbin && cp mbin/.env.example mbin/.env
       - name: Install dependencies
         run: npm ci
       - name: Run update/build script
