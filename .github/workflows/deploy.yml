@@ -43,7 +43,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run update/build script
-        run: bash update.sh -d mbin
+        run: bash update.sh -f -d mbin
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
