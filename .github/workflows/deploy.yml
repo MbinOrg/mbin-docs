@@ -1,6 +1,10 @@
 name: Deploy docs to GitHub Pages
 
 on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ['main']
+
   # Runs every hour
   schedule:
     - cron: "0 * * * *"
