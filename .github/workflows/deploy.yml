@@ -1,9 +1,6 @@
 name: Deploy docs to GitHub Pages
 
 on:
-  # FOR TESTING ONLY, remove once ready
-  pull_request:
-
   # Runs every hour
   schedule:
     - cron: "0 * * * *"
