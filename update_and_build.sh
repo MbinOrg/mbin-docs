@@ -96,7 +96,6 @@ if $force_update || [[ $(git rev-list HEAD...origin/"$branch_name" --count) -gt 
     cd "$local_dir" || exit
 
     composer install --no-scripts --no-progress
-    touch "$SCRIPT_DIR/docs/mbin-api.json"
     php bin/console nelmio:apidoc:dump --format=json --no-pretty > "$SCRIPT_DIR/docs/mbin-api.json" 2>/dev/null
 
     if [ "$skip_build" = "false" ]; then
