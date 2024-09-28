@@ -97,7 +97,7 @@ if $force_update || [[ $(git rev-list HEAD...origin/"$branch_name" --count) -gt 
 
     composer install --no-scripts --no-progress
     touch "$SCRIPT_DIR/docs/mbin-api.json"
-    php bin/console nelmio:apidoc:dump --format=json --no-pretty > "$SCRIPT_DIR/docs/mbin-api.json" 2>&1
+    php bin/console nelmio:apidoc:dump --format=json --no-pretty > "$SCRIPT_DIR/docs/mbin-api.json" 2>/dev/null
 
     if [ "$skip_build" = "false" ]; then
         # Go back to the directory where the script is located
