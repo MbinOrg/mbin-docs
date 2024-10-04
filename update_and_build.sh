@@ -44,7 +44,7 @@ done
 shift $((OPTIND -1))
 
 if [ ! -d "$local_dir" ]; then
-    echo "Error: Directory $local_dir does not exist. Exit"
+    echo "Error: Directory $local_dir does not exist. Exiting"
     exit 1
 fi    
 
