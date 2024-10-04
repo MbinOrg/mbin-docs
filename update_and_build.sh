@@ -5,8 +5,8 @@ SCRIPT_DIR=$(dirname "$(realpath "$0")")
 
 # Define variables
 force_update=false
+skip_build=false
 local_dir="./mbin-repo"
-post_command="echo 1"
 new_tag_exists=false
 latest_tag=""
 branch_name="main"
@@ -15,16 +15,20 @@ branch_name="main"
 usage() {
     echo "Usage: $0 [-f] [-d LOCAL_DIR] [-b BRANCH_NAME]" 1>&2
     echo "    -f          Force update even if there are no changes" 1>&2
+    echo "    -s          Skip the build (eg. when you want to execute npm start)" 1>&2
     echo "    -d LOCAL_DIR   Specify the local directory of the repository (default: ./mbin-repo)" 1>&2
     echo "    -b BRANCH_NAME   Specify the branch name to pull changes from (default: main)" 1>&2
     exit 1
 }
 
 # Parse options
-while getopts ":fd:b:" opt; do
+while getopts ":fsd:b:" opt; do
     case ${opt} in
         f )
             force_update=true
+            ;;
+        s )
+            skip_build=true
             ;;
         d )
             local_dir=$OPTARG
@@ -39,8 +43,13 @@ while getopts ":fd:b:" opt; do
 done
 shift $((OPTIND -1))
 
+if [ ! -d "$local_dir" ]; then
+    echo "Error: Directory $local_dir does not exist. Exiting"
+    exit 1
+fi    
+
 # Change directory to the local repository
-cd "$local_dir" || exit
+cd "$local_dir"
 
 # Fetch old tags
 old_tags=$(git tag -l)
@@ -50,6 +59,9 @@ git fetch origin
 
 # Check if there are any changes
 if $force_update || [[ $(git rev-list HEAD...origin/"$branch_name" --count) -gt 0 ]]; then
+    # Switch to the branch (or it will pull changes in to the currently checked out branch)
+    git checkout "$branch_name"
+
     # Pull changes if there are any
     git pull origin "$branch_name"
 
@@ -83,19 +95,14 @@ if $force_update || [[ $(git rev-list HEAD...origin/"$branch_name" --count) -gt 
 
     cd "$local_dir" || exit
 
-    composer install --no-scripts
-    touch "$SCRIPT_DIR/docs/mbin-api.json"
-    php bin/console nelmio:apidoc:dump --format=json --no-pretty > "$SCRIPT_DIR/docs/mbin-api.json"
+    composer install --no-scripts --no-progress
+    php bin/console nelmio:apidoc:dump --format=json --no-pretty > "$SCRIPT_DIR/docs/mbin-api.json" 2>/dev/null
 
-    # Go back to the directory where the script is located
-    cd "$SCRIPT_DIR" || exit
+    if [ "$skip_build" = "false" ]; then
+        # Go back to the directory where the script is located
+        cd "$SCRIPT_DIR" || exit
 
-    npm run build
-
-    # Set post command
-    if $new_tag_exists; then
-        echo "Executing post command: $post_command"
-        $post_command
+        npm run build
     fi
 else
     echo "No changes found."
