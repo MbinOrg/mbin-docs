@@ -6,7 +6,7 @@ SCRIPT_DIR=$(dirname "$(realpath "$0")")
 # Define variables
 force_update=false
 skip_build=false
-local_dir="./mbin-repo"
+local_dir="./mbin"
 new_tag_exists=false
 latest_tag=""
 branch_name="main"
@@ -16,7 +16,7 @@ usage() {
     echo "Usage: $0 [-f] [-d LOCAL_DIR] [-b BRANCH_NAME]" 1>&2
     echo "    -f          Force update even if there are no changes" 1>&2
     echo "    -s          Skip the build (eg. when you want to execute npm start)" 1>&2
-    echo "    -d LOCAL_DIR   Specify the local directory of the repository (default: ./mbin-repo)" 1>&2
+    echo "    -d LOCAL_DIR   Specify the local directory of the repository (default: ./mbin)" 1>&2
     echo "    -b BRANCH_NAME   Specify the branch name to pull changes from (default: main)" 1>&2
     exit 1
 }
