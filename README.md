@@ -8,9 +8,11 @@ The docs are built using [Docusaurus](https://docusaurus.io/) and [Redocusaurus]
 
 For running this site you need to have an [Mbin](https://github.com/mbinOrg/mbin) repository, where our docs are hosted. The update script takes care of copying over docs and images and generating an open-api json for generating the api docs.
 
+By default the script assumes the mbin repo is in the same directory as this repo under the directory name `mbin`. If you want to use a different repo you can specify the path to the repo with the `-d` flag.
+
 ```bash
 npm ci
-bash update_and_build.sh -d YOUR_MBIN_REPO
+./update_and_build.sh -d YOUR_MBIN_REPO
 ```
 
 The repo that is linked will by default fetch and pull changes from the main branch. If you want to use another branch you can specify that by `-b BRANCH`.
