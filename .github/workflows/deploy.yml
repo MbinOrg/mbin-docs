@@ -54,7 +54,6 @@ jobs:
         run: echo "dir=$(npm get cache)" >> $GITHUB_OUTPUT
 
       - uses: actions/cache@v4
-        working-directory: ./mbin
         with:
           path: ${{ steps.npm-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
@@ -70,7 +69,6 @@ jobs:
 
       - name: Cache composer cache directory
         uses: actions/cache@v4
-        working-directory: ./mbin
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
