@@ -20,5 +20,5 @@ yarn-debug.log*
 yarn-error.log*
 
 # mbin config
-/mbin-repo
+/mbin
 /docs
