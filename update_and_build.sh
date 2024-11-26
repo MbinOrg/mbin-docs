@@ -90,7 +90,6 @@ if $force_update || [[ $(git rev-list HEAD...origin/"$branch_name" --count) -gt 
     # copy all .md files and folders from the source repo
     rsync --mkpath -f'+ */' -f'+ *.md' -f'- *' -r "$local_dir/docs" ./
     cp "$local_dir/docs/images" -r ./docs/
-    cp "$local_dir/CONTRIBUTING.md" ./docs/04-contributing/README.md
     cp "$local_dir/C4.md" ./docs/04-contributing/
 
     cd "$local_dir" || exit
