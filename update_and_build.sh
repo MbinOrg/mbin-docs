@@ -94,8 +94,11 @@ if $force_update || [[ $(git rev-list HEAD...origin/"$branch_name" --count) -gt 
 
     cd "$local_dir" || exit
 
-    composer install --no-scripts --no-progress
-    php bin/console nelmio:apidoc:dump --format=json --no-pretty > "$SCRIPT_DIR/docs/mbin-api.json" 2>/dev/null
+    composer install --no-scripts --no-progress || exit 1
+    php bin/console nelmio:apidoc:dump --format=json --no-pretty > "$SCRIPT_DIR/docs/mbin-api.json" 2>/dev/null || exit 1
+    php bin/console doctrine:migrations:migrate --no-interaction || exit 1
+    php bin/console mbin:ap:keys:update --no-interaction || exit 1
+    php bin/console mbin:docs:gen:federation "$SCRIPT_DIR/docs/05-fediverse_developers/README.md" -o || exit 1
 
     if [ "$skip_build" = "false" ]; then
         # Go back to the directory where the script is located
