@@ -65,6 +65,14 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Run update/build script
+        env:
+          APP_ENV: test # in the test environment the messengers will not get wrapped in a transaction
+          DATABASE_URL: postgresql://mbin:ChangeThisPostgresPass@localhost:5432/mbin?serverVersion=16&charset=utf8 # being in the test environment automatically appends _test to the db name
+          MESSENGER_TRANSPORT_DSN: sync://
+          MAILER_DSN: null://default
+          REDIS_HOST: valkey
+          REDIS_PORT: 6379
+          REDIS_PASSWORD: 
         run: bash update_and_build.sh -f
 
       - name: Upload artifact
@@ -72,7 +80,32 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./build
-
+    services:
+      postgres:
+        # Docker Hub image
+        image: postgres:16
+        # Provide the password for postgres
+        env:
+          POSTGRES_DB: mbin_test
+          POSTGRES_USER: mbin
+          POSTGRES_PASSWORD: ChangeThisPostgresPass
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports: ["5432:5432"]
+      valkey:
+        # Docker Hub image
+        image: valkey/valkey
+        # Set health checks to wait until redis has started
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports: ["6379:6379"]
   # Deployment job
   deploy:
     environment:
