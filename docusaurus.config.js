@@ -100,6 +100,11 @@ const config = {
                         position: 'left',
                     },
                     {
+                        href: 'https://joinmbin.org',
+                        label: 'Project',
+                        position: 'left',
+                    },
+                    {
                         href: 'https://github.com/mbinOrg/mbin',
                         label: 'GitHub',
                         position: 'right',
@@ -112,6 +117,10 @@ const config = {
                     {
                         title: 'Links',
                         items: [
+                            {
+                                href: 'https://joinmbin.org',
+                                label: 'Project Website',
+                            },
                             {
                                 href: '/',
                                 label: 'Docs',
@@ -126,8 +135,8 @@ const config = {
                         title: 'Community',
                         items: [
                             {
-                                label: 'Mbin Dev Magazine',
-                                href: 'https://kbin.run/m/Mdev',
+                                label: 'Mbin Meta Magazine',
+                                href: 'https://gehirneimer.de/m/mbinmeta',
                             },
                             {
                                 label: 'Mbin Releases Magazine',
