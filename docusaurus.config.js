@@ -135,12 +135,16 @@ const config = {
                         title: 'Community',
                         items: [
                             {
-                                label: 'Mbin Meta Magazine',
+                                label: 'Mbin Meta Magazine (gehirneimer.de)',
                                 href: 'https://gehirneimer.de/m/mbinmeta',
                             },
                             {
-                                label: 'Mbin Releases Magazine',
+                                label: 'Mbin Releases Magazine (gehirneimer.de)',
                                 href: 'https://gehirneimer.de/m/mbinReleases',
+                            },
+                            {
+                                label: 'Mbin Blog Updates (melroy.org)',
+                                href: 'https://kbin.melroy.org/m/updates',
                             },
                             {
                                 label: 'Matrix Space',
