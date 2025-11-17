@@ -9,9 +9,9 @@ on:
     branches:
       - main
 
-  # Runs every hour
-  schedule:
-    - cron: "0 * * * *"
+  # Runs when a repository_dispatch event with the type 'update-docs' is received
+  repository_dispatch:
+    types: [update-docs]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -36,9 +36,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: "22"
+          node-version: "24"
           cache: "npm"
 
       - name: Setup PHP
@@ -80,10 +80,11 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./build
+
     services:
       postgres:
         # Docker Hub image
-        image: postgres:16
+        image: postgres:18
         # Provide the password for postgres
         env:
           POSTGRES_DB: mbin_test
@@ -96,6 +97,7 @@ jobs:
           --health-timeout 5s
           --health-retries 5
         ports: ["5432:5432"]
+
       valkey:
         # Docker Hub image
         image: valkey/valkey
@@ -106,6 +108,7 @@ jobs:
           --health-timeout 5s
           --health-retries 5
         ports: ["6379:6379"]
+
   # Deployment job
   deploy:
     environment:
