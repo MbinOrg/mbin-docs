@@ -87,10 +87,13 @@ if $force_update || [[ $(git rev-list HEAD...origin/"$branch_name" --count) -gt 
     cd "$SCRIPT_DIR" || exit
 
     rm -r ./docs/*
+    # replace symlinks with real files
+    find "$local_dir/docs/" -type l -exec bash -c 'cp --remove-destination $(realpath "{}") "{}"' \;
     # copy all .md files and folders from the source repo
     rsync --mkpath -f'+ */' -f'+ *.md' -f'- *' -r "$local_dir/docs" ./
     cp "$local_dir/docs/images" -r ./docs/
-    cp "$local_dir/C4.md" ./docs/03-contributing/03-C4.md
+    # fixup files
+    sed -i 's/\[Contribution Guidelines\](CONTRIBUTING\.md)/*Contribution Guidelines*/' ./docs/03-contributing/03-ai-policy.md || exit 1
 
     cd "$local_dir" || exit
 
